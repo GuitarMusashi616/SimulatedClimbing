@@ -1,32 +1,18 @@
+from state import *
+from search import *
 
 
-
-
-
-def hill_climbing(problem):
-    current = problem.initial_state
-    while True:
-        neighbor = current.highest_valued_neighbor()
-        if neighbor.value <= current.value:
-            return current.state
-        current = neighbor
-
-def simulated_annealing(problem, schedule):
-    current = Node(problem.initial_state)
-    for t in range(1000):
-        T = schedule(t)
-        if not T:
-            return current
-
-        neighbor = current.highest_valued_neighbor()
-
-        delta_E = neighbor.value - current.value
-        if delta_E > 0:
-            current = next
-        else:
-            current = next if prob(delta_E, T)
-
+class Problem:
+    def __init__(self):
+        width = 10
+        height = 5
+        hospitals = [(4, 4), (9, 1)]
+        houses = [(1, 1), (2, 3), (6, 0), (8, 4)]
+        self.initial_state = State(width, height, hospitals, houses)
 
 
 if __name__ == '__main__':
-    pass
+    problem = Problem()
+    hill_climbing(problem)
+
+
