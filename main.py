@@ -2,17 +2,36 @@ from state import *
 from search import *
 
 
-class Problem:
-    def __init__(self):
-        width = 10
-        height = 5
-        hospitals = [(4, 4), (9, 1)]
-        houses = [(1, 1), (2, 3), (6, 0), (8, 4)]
-        self.initial_state = State(width, height, hospitals, houses)
+def hill_climbing_demo():
+    # problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
+    problem = Problem.example()
+    print(problem)
+    print(hill_climbing(problem))
+
+
+def random_restart_demo():
+    problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
+    # problem = Problem.example()
+    print(problem)
+    print(hill_climbing(problem))
+    print(hill_climbing(problem, True))
+    print(hill_climbing(problem, True))
+    print(hill_climbing(problem, True))
+
+
+def schedule(t):
+    return 10000 - t*10
+
+
+def simulated_annealing_demo():
+    problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
+    # problem = Problem.example()
+    print(problem)
+    print(simulated_annealing(problem, schedule))
 
 
 if __name__ == '__main__':
-    problem = Problem()
-    hill_climbing(problem)
+    hill_climbing_demo()
+
 
 
