@@ -1,6 +1,6 @@
 from state import *
-from random import choice
-
+from random import random
+from math import exp
 
 def hill_climbing(problem, random_restart=False):
     current_state = problem.initial_state
@@ -27,4 +27,5 @@ def simulated_annealing(problem, schedule):
             current_state = neighbor_state
         else:
             # look at all the neighbors and pick one based on T and ΔE
-            current_state = choice(current_state.neighbors)
+            if exp(ΔE/T) <= random():
+                current_state = neighbor_state

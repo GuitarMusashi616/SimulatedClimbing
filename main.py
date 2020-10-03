@@ -3,13 +3,16 @@ from search import *
 
 
 def hill_climbing_demo():
+    print("Hill Climbing Initial Board")
     # problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
     problem = Problem.example()
     print(problem)
     print(hill_climbing(problem))
+    print('\n')
 
 
 def random_restart_demo():
+    print("Random Restart Initial Board")
     problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
     # problem = Problem.example()
     print(problem)
@@ -17,6 +20,7 @@ def random_restart_demo():
     print(hill_climbing(problem, True))
     print(hill_climbing(problem, True))
     print(hill_climbing(problem, True))
+    print('\n')
 
 
 def schedule(t):
@@ -24,14 +28,17 @@ def schedule(t):
 
 
 def simulated_annealing_demo():
+    print("Simulated Annealing Initial Board")
     problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
     # problem = Problem.example()
     print(problem)
     print(simulated_annealing(problem, schedule))
+    print('\n')
 
 
 if __name__ == '__main__':
-    hill_climbing_demo()
+    random_restart_demo()
+    simulated_annealing_demo()
 
 
 
