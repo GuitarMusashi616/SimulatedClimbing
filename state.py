@@ -9,12 +9,13 @@ def manhattan_distance(coord_1, coord_2):
     return abs(coord_1[0] - coord_2[0]) + abs(coord_1[1] - coord_2[1])
 
 
-def generate_unique_coords(amount, width=10, height=5):
-    dic = {}
-    while len(dic) < amount:
-        random_coord = randint(0, width - 1), randint(0, height - 1)
-        dic[random_coord] = True
-    return list(dic)
+def generate_unique_coords(num_new, existing_coords=[], width=10, height=5):
+    new_coords = {}
+    while len(new_coords) < num_new:
+        new_coord = (randint(0,width-1), randint(0, height-1))
+        if new_coord not in existing_coords:
+            new_coords[new_coord] = True
+    return list(new_coords)
 
 
 class Problem:
@@ -26,7 +27,7 @@ class Problem:
 
     @classmethod
     def generate(cls, width, height, houses, hospitals):
-        coords = generate_unique_coords(houses+hospitals, width, height)
+        coords = generate_unique_coords(houses+hospitals, [], width, height)
         return Problem(State(width, height, coords[:houses], coords[houses:]))
 
     @classmethod
@@ -36,6 +37,9 @@ class Problem:
         hospitals = [(4, 4), (9, 1)]
         houses = [(1, 1), (2, 3), (6, 0), (8, 4)]
         return Problem(State(width, height, houses, hospitals))
+
+    def shuffle_hospitals(self):
+        self.initial_state.random_start()
 
 
 class State:
@@ -104,18 +108,11 @@ class State:
         return True
 
     def random_start(self):
+        """shuffle the hospital locations"""
         # add house coords to dic
         # create num_hospitals more numbers
         # return the new numbers
-        dic = {}
-        for house in self.houses:
-            dic[house] = True
-
-        while len(dic) < len(self.houses) + len(self.hospitals):
-            random_coord = randint(0, self.width-1), randint(0, self.height-1)
-            dic[random_coord] = True
-
-        self.hospitals = list(dic)[-len(self.hospitals):]
+        self.hospitals = generate_unique_coords(len(self.hospitals), self.houses, self.width, self.height)
 
     def __lt__(self, other):
         assert type(self) == State
