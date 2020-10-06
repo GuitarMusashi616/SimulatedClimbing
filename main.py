@@ -58,7 +58,7 @@ def simulated_annealing_demo(problem: Problem, time_steps: int):
     print('\n')
 
 
-def prompt_integer(string: str):
+def prompt_integer(string: str) -> int:
     """Continually prompts the user until an integer is received
 
     :param string: text that should be displayed by the prompt

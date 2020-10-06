@@ -9,7 +9,7 @@ from math import exp
 from typing import Callable
 
 
-def hill_climbing(problem: Problem, random_restart: bool = False):
+def hill_climbing(problem: Problem, random_restart: bool = False) -> Tuple[State, int]:
     """The Hill Climbing Algorithm: picks the neighboring state with the highest increase in value
 
     :param problem: The problem object that wraps the state representation of the grid
@@ -28,7 +28,7 @@ def hill_climbing(problem: Problem, random_restart: bool = False):
         configs_evaluated += 1
 
 
-def simulated_annealing(problem: Problem, schedule: Callable[[int], int], time_steps: int = 1000, random_restart: bool = False):
+def simulated_annealing(problem: Problem, schedule: Callable[[int], int], time_steps: int = 1000, random_restart: bool = False) -> Tuple[State, int]:
     """The Simulated Annealing Algorithm: picks the neighboring state based on its increase in value and the current temperature
 
     :param problem: The problem object that wraps the state representation of the grid

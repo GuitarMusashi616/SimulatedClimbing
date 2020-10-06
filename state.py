@@ -5,10 +5,10 @@
 
 from random import randint
 from math import inf
-from typing import Tuple, Iterable
+from typing import Tuple, Iterable, List
 
 
-def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
+def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]) -> int:
     """Returns the vertical difference + the horizontal difference of the coordinates
 
     :param coord_1: A coordinate representing a point on a grid
@@ -21,7 +21,7 @@ def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
 
 
 def generate_unique_coords(num_new: int, existing_coords: Iterable[Tuple[int, int]] = [], width: int = 10,
-                           height: int = 5):
+                           height: int = 5) -> List[Tuple[int, int]]:
     """Creates a unique set of coordinates of length num_new that are also not the same as any coords in existing_coords
 
     :param num_new: specifies how many new random unique coordinates are needed
@@ -68,7 +68,7 @@ class State:
         return string
 
     @property
-    def value(self):
+    def value(self) :
         """Returns the total cost of the state configuration"""
         return self.get_value()
 
