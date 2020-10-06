@@ -1,8 +1,14 @@
 from random import randint
 from math import inf
+from typing import Tuple
 
 
-def manhattan_distance(coord_1, coord_2):
+def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
+    """Returns the vertical difference + the horizontal difference of the coordinates
+
+    :param coord_1: A coordinate representing a point on a grid
+    :param coord_2: Another coordinate representing a point on a grid
+    """
     assert type(coord_1) == tuple and type(coord_2) == tuple
     assert len(coord_1) == 2 and len(coord_2) == 2
 

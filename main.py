@@ -4,6 +4,7 @@ from math import pow
 
 
 def hill_climbing_demo():
+    """Demonstrates the Hill Climbing example from the assignment description"""
     print("Hill Climbing Initial Board")
     # problem = Problem.generate(width=30, height=20, houses=8, hospitals=4)
     problem = Problem.example()
@@ -12,7 +13,11 @@ def hill_climbing_demo():
     print('\n')
 
 
-def random_restart_demo(problem):
+def random_restart_demo(problem: Problem):
+    """Runs the Hill Climbing with Random Restart algorithm 4 times for the given problem/ grid
+
+    :param problem: The problem object that wraps the state representation of the grid
+    """
     print("Random Restart Initial Board")
     print(problem)
 
@@ -23,12 +28,21 @@ def random_restart_demo(problem):
     print('\n')
 
 
-def schedule(t):
-    """Schedule function used by simulated annealing to get decrease in temperature"""
+def schedule(t: int) -> int:
+    """Schedule function used by simulated annealing to get decrease in temperature
+
+    :param t: the time value as an integer
+    :returns: a temperature T
+    """
     return 2 * pow(.9, t//100)
 
 
-def simulated_annealing_demo(problem, time_steps):
+def simulated_annealing_demo(problem: Problem, time_steps: int):
+    """Runs the Simulated Annealing Algorithm 4 times for the given problem/ grid
+
+    :param problem: The problem object that wraps the state representation of the grid
+    :param time_steps: The number of time steps that simulated annealing should undergo
+    """
     print("Simulated Annealing Initial Board")
     print(problem)
 
@@ -39,7 +53,11 @@ def simulated_annealing_demo(problem, time_steps):
     print('\n')
 
 
-def prompt_integer(string):
+def prompt_integer(string: str):
+    """Continually prompts the user until an integer is received
+
+    :param string: text that should be displayed by the prompt
+    """
     number = None
     while not number:
         inp = input(string)
