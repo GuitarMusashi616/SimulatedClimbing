@@ -40,13 +40,13 @@ def generate_unique_coords(num_new: int, existing_coords: Iterable[Tuple[int, in
 class State:
     """Used to store, manipulate, and view the contents of each of the states"""
 
-    def __init__(self, width, height, houses, hospitals):
+    def __init__(self, width: int, height: int, houses: Iterable[Tuple[int, int]], hospitals: Iterable[Tuple[int, int]]):
         """Used to initialize the state object
 
         :param width: specifies the width of the grid
         :param height specifies the height of the grid
-        :param houses: specifies the number of houses in the grid
-        :param hospitals specifies the number of hospitals im the grid
+        :param houses: specifies the coordinates of the houses in the grid
+        :param hospitals specifies the coordinates of the hospitals im the grid
         """
         self.width = width
         self.height = height
