@@ -1,3 +1,8 @@
+# Austin Williams and Jack Carrol
+# Frank Moore
+# Artificial Intelligence
+# 5 October 2020
+
 from state import *
 from random import random
 from math import exp

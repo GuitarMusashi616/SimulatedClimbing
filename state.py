@@ -1,3 +1,8 @@
+# Austin Williams and Jack Carrol
+# Frank Moore
+# Artificial Intelligence
+# 5 October 2020
+
 from random import randint
 from math import inf
 from typing import Tuple, Iterable
