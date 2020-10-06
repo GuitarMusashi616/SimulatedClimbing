@@ -1,7 +1,6 @@
 from random import randint
 from math import inf
-from typing import Tuple
-
+from typing import Tuple, Iterable
 
 def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
     """Returns the vertical difference + the horizontal difference of the coordinates
@@ -15,41 +14,33 @@ def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
     return abs(coord_1[0] - coord_2[0]) + abs(coord_1[1] - coord_2[1])
 
 
-def generate_unique_coords(num_new, existing_coords=[], width=10, height=5):
+def generate_unique_coords(num_new: int, existing_coords: Iterable[Tuple[int, int]] = [], width: int=10, height: int=5):
+    """Creates a unique set of coordinates of length num_new that are also not the same as any coords in existing_coords
+
+    :param num_new: specifies how many new random unique coordinates are needed
+    :param existing_coords: an iterable of coordinates, new coordinates will not be the same as any coordinates in this iterable
+    :param width: specifies the width of the grid
+    :param height specifies the height of the grid
+    """
     new_coords = {}
     while len(new_coords) < num_new:
-        new_coord = (randint(0,width-1), randint(0, height-1))
+        new_coord = (randint(0, width - 1), randint(0, height - 1))
         if new_coord not in existing_coords:
             new_coords[new_coord] = True
     return list(new_coords)
 
 
-class Problem:
-    def __init__(self, state):
-        self.initial_state = state
-
-    def __repr__(self):
-        return repr(self.initial_state)
-
-    @classmethod
-    def generate(cls, width, height, houses, hospitals):
-        coords = generate_unique_coords(houses+hospitals, [], width, height)
-        return Problem(State(width, height, coords[:houses], coords[houses:]))
-
-    @classmethod
-    def example(cls):
-        width = 10
-        height = 5
-        hospitals = [(4, 4), (9, 1)]
-        houses = [(1, 1), (2, 3), (6, 0), (8, 4)]
-        return Problem(State(width, height, houses, hospitals))
-
-    def shuffle_hospitals(self):
-        self.initial_state.random_start()
-
-
 class State:
+    """Used to store, manipulate, and view the contents of each of the states"""
+
     def __init__(self, width, height, houses, hospitals):
+        """Used to initialize the state object
+
+        :param width: specifies the width of the grid
+        :param height specifies the height of the grid
+        :param houses: specifies the number of houses in the grid
+        :param hospitals specifies the number of hospitals im the grid
+        """
         self.width = width
         self.height = height
         self.houses = houses
@@ -131,3 +122,39 @@ class State:
         assert type(self) == State
         assert type(other) == State
         return self.value - other.value
+
+
+class Problem:
+    """A class that is used to generate problems, each problem has a state and can be used by a search algorithm"""
+
+    def __init__(self, state: State):
+        """Used to initialize a problem
+
+        :param state: used to store in the Problem object
+        """
+        self.initial_state = state
+
+    def __repr__(self):
+        """Used to return a string representation of the current state of the grid"""
+        return repr(self.initial_state)
+
+    @classmethod
+    def generate(cls, width: int, height: int, houses: int, hospitals: int = 2):
+        """Creates a Problem object using the width, height, houses, and hospitals arguments
+
+        :param width: The width of the grid
+        :param height: The height of the grid
+        :param houses: The number of houses in the grid
+        :param hospitals: The number of hospitals in the grid
+        """
+        coords = generate_unique_coords(houses + hospitals, [], width, height)
+        return Problem(State(width, height, coords[:houses], coords[houses:]))
+
+    @classmethod
+    def example(cls):
+        """Returns an example problem with the values below (matches the one from the assignment description)"""
+        width = 10
+        height = 5
+        hospitals = [(4, 4), (9, 1)]
+        houses = [(1, 1), (2, 3), (6, 0), (8, 4)]
+        return Problem(State(width, height, houses, hospitals))
