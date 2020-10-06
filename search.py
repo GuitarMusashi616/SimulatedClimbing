@@ -2,6 +2,7 @@ from state import *
 from random import random
 from math import exp
 
+
 def hill_climbing(problem, random_restart=False):
     current_state = problem.initial_state
     if random_restart:
@@ -15,7 +16,7 @@ def hill_climbing(problem, random_restart=False):
 
 def simulated_annealing(problem, schedule):
     current_state = problem.initial_state
-    for t in range(1001):
+    for t in range(1000):
         T = schedule(t)
         if T <= 0:
             return current_state
@@ -27,5 +28,8 @@ def simulated_annealing(problem, schedule):
             current_state = neighbor_state
         else:
             # look at all the neighbors and pick one based on T and ΔE
-            if exp(ΔE/T) <= random():
+            prob = exp(ΔE/T)
+            rand = random()
+            if prob >= rand:
                 current_state = neighbor_state
+    return current_state
