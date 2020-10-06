@@ -16,13 +16,13 @@ def hill_climbing(problem, random_restart=False):
         configs_evaluated += 1
 
 
-def simulated_annealing(problem, schedule, random_restart=False):
+def simulated_annealing(problem, schedule, time_steps=1000, random_restart=False):
     current_state = problem.initial_state.clone()
     configs_evaluated = 0
     if random_restart:
         current_state.random_start()
 
-    for t in range(1000):
+    for t in range(time_steps):
         T = schedule(t)
         if T <= 0:
             return current_state

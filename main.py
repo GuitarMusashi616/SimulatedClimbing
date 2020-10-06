@@ -28,11 +28,11 @@ def schedule(t):
     return 2 * pow(.9, t//100)
 
 
-def simulated_annealing_demo(problem):
+def simulated_annealing_demo(problem, time_steps):
     print("Simulated Annealing Initial Board")
     print(problem)
 
-    solutions = [simulated_annealing(problem, schedule, True) for _ in range(4)]
+    solutions = [simulated_annealing(problem, schedule, time_steps, True) for _ in range(4)]
     for solution, configurations in solutions:
         print(f"Configurations Evaluated: {configurations}")
         print(solution)
@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
     for grid in grids:
         random_restart_demo(grid)
-        simulated_annealing_demo(grid)
+        simulated_annealing_demo(grid, 1000)
 
 
 
