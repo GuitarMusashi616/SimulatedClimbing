@@ -4,6 +4,7 @@ from random import randint
 
 
 def test_neighbors():
+    """Makes sure that the cloning method provides deep copies"""
     problem = Problem.example()
     state_1 = problem.initial_state
     state_2 = state_1.clone()
@@ -18,6 +19,7 @@ def test_neighbors():
 
 
 def test_more_unique_coords():
+    """Makes sure that the coordinates generated are unique"""
     random_existing = [(randint(0,9), randint(0,5)) for _ in range(20)]
     amount = 5
 

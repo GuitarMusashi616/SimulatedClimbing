@@ -2,6 +2,7 @@ from random import randint
 from math import inf
 from typing import Tuple, Iterable
 
+
 def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
     """Returns the vertical difference + the horizontal difference of the coordinates
 
@@ -14,7 +15,8 @@ def manhattan_distance(coord_1: Tuple[int, int], coord_2: Tuple[int, int]):
     return abs(coord_1[0] - coord_2[0]) + abs(coord_1[1] - coord_2[1])
 
 
-def generate_unique_coords(num_new: int, existing_coords: Iterable[Tuple[int, int]] = [], width: int=10, height: int=5):
+def generate_unique_coords(num_new: int, existing_coords: Iterable[Tuple[int, int]] = [], width: int = 10,
+                           height: int = 5):
     """Creates a unique set of coordinates of length num_new that are also not the same as any coords in existing_coords
 
     :param num_new: specifies how many new random unique coordinates are needed
@@ -47,6 +49,7 @@ class State:
         self.hospitals = hospitals
 
     def __repr__(self):
+        """Returns a representation of the state, H's represent hospitals, O's represent houses"""
         string = f"Cost: {self.value}\n"
         for y in range(self.height):
             for x in range(self.width):
@@ -61,9 +64,11 @@ class State:
 
     @property
     def value(self):
+        """Returns the total cost of the state configuration"""
         return self.get_value()
 
     def get_value(self):
+        """Returns the total cost of the state configuration"""
         # takes O(houses*hospitals) time
         hospital_distances = []
         for house in self.houses:
@@ -77,6 +82,7 @@ class State:
 
     @property
     def neighbors(self):
+        """Returns the up to 8 neighboring states that correspond to the hospitals moving up, down, left, or right"""
         neighbors = []
         for i, hospital in enumerate(self.hospitals):
             for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
@@ -88,9 +94,15 @@ class State:
         return neighbors
 
     def clone(self):
+        """Returns a copy of the state"""
         return State(self.width, self.height, self.houses.copy(), self.hospitals.copy())
 
-    def is_accessible(self, coord):
+    def is_accessible(self, coord: Tuple[int, int]):
+        """Returns True if the coordinate is within the grid bounds and there are no overlapping hospitals or houses
+        for the coordinate
+
+        :param coord: The coordinate of either a hospital or house
+        """
         assert type(coord) == tuple
         assert len(coord) == 2
 
@@ -105,7 +117,7 @@ class State:
         return True
 
     def random_start(self):
-        """shuffle the hospital locations"""
+        """Shuffle the hospital locations"""
         self.hospitals = generate_unique_coords(len(self.hospitals), self.houses, self.width, self.height)
 
     def __lt__(self, other):
