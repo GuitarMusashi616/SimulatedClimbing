@@ -4,7 +4,7 @@ from math import exp
 
 
 def hill_climbing(problem, random_restart=False):
-    current_state = problem.initial_state
+    current_state = problem.initial_state.clone()
     configs_evaluated = 0
     if random_restart:
         current_state.random_start()
@@ -17,7 +17,7 @@ def hill_climbing(problem, random_restart=False):
 
 
 def simulated_annealing(problem, schedule, random_restart=False):
-    current_state = problem.initial_state
+    current_state = problem.initial_state.clone()
     configs_evaluated = 0
     if random_restart:
         current_state.random_start()

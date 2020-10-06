@@ -2,6 +2,7 @@ from search import *
 from state import *
 from random import randint
 
+
 def test_neighbors():
     problem = Problem.example()
     state_1 = problem.initial_state
@@ -20,11 +21,11 @@ def test_more_unique_coords():
     random_existing = [(randint(0,9), randint(0,5)) for _ in range(20)]
     amount = 5
 
-    lst = more_unique_coords(random_existing, amount)
+    lst = generate_unique_coords(amount, random_existing)
     len(lst) == amount
 
-    # for item in lst:
-    #     assert item not in random_existing
+    for item in lst:
+        assert item not in random_existing
 
 
 if __name__ == '__main__':

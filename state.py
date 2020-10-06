@@ -109,9 +109,6 @@ class State:
 
     def random_start(self):
         """shuffle the hospital locations"""
-        # add house coords to dic
-        # create num_hospitals more numbers
-        # return the new numbers
         self.hospitals = generate_unique_coords(len(self.hospitals), self.houses, self.width, self.height)
 
     def __lt__(self, other):
