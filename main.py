@@ -15,12 +15,12 @@ def hill_climbing_demo():
 def random_restart_demo():
     print("Random Restart Initial Board")
     problem = Problem.generate(width=30, height=20, houses=8, hospitals=2)
-    # problem = Problem.example()
     print(problem)
-    print(hill_climbing(problem))
-    print(hill_climbing(problem, True))
-    print(hill_climbing(problem, True))
-    print(hill_climbing(problem, True))
+
+    solutions = [hill_climbing(problem, True) for _ in range(4)]
+    for solution, configurations in solutions:
+        print(f"Configurations Evaluated: {configurations}")
+        print(solution)
     print('\n')
 
 
@@ -32,7 +32,11 @@ def simulated_annealing_demo():
     print("Simulated Annealing Initial Board")
     problem = Problem.generate(width=30, height=20, houses=8, hospitals=2)
     print(problem)
-    print(simulated_annealing(problem, schedule))
+
+    solutions = [simulated_annealing(problem, schedule, True) for _ in range(4)]
+    for solution, configurations in solutions:
+        print(f"Configurations Evaluated: {configurations}")
+        print(solution)
     print('\n')
 
 
