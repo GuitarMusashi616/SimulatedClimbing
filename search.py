@@ -4,7 +4,7 @@
 # 5 October 2020
 
 from state import *
-from random import random
+from random import random, choice
 from math import exp
 from typing import Callable
 
@@ -47,9 +47,9 @@ def simulated_annealing(problem: Problem, schedule: Callable[[int], int], time_s
         if T <= 0:
             return current_state
 
-        neighbor_state = min(current_state.neighbors)
+        neighbor_state = choice(current_state.neighbors)
 
-        ΔE = neighbor_state - current_state
+        ΔE = current_state - neighbor_state
         if ΔE > 0:
             current_state = neighbor_state
             configs_evaluated += 1
